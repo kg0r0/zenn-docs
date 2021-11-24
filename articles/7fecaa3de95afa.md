@@ -1,5 +1,5 @@
 ---
-title: "Chrome DevTools Recoderためしてみた"
+title: "Chrome DevToolsのRecoderためしてみた"
 emoji: "📚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["chrome", "javascript"]
