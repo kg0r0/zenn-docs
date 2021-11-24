@@ -1,18 +1,18 @@
 ---
-title: "Chrome DevToolsのRecoderためしてみた"
+title: "Chrome DevToolsのRecorderためしてみた"
 emoji: "📚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["chrome", "javascript"]
 published: true
 ---
 # はじめに
-Chrome DevToolsのRecoderをためしてみただけの記事です。
+Chrome DevToolsのRecorderをためしてみただけの記事です。
 詳細は以下の公式ページを参照ください。
 https://developer.chrome.com/docs/devtools/recorder/
 なお、今回は使用したChromeのバージョンは``Version 98.0.4724.0 (Official Build) canary (x86_64)``です。
 
 # Recording
-まずは任意のWebページで開発者ツールを開き、``More options > More tools > Recorder``の順でRecoderを開きます。
+まずは任意のWebページで開発者ツールを開き、``More options > More tools > Recorder``の順でRecorderを開きます。
 ![](/images/7fecaa3de95afa/recorder.png)
 つづいて``＋``ボタンを押下し、``[RECORDING NAME]``を入力して``[Start a new recording]``を押下します。
 ![](/images/7fecaa3de95afa/start_recording.png)
@@ -36,7 +36,7 @@ Puppeteerの[Debugging tips](https://github.com/puppeteer/puppeteer#debugging-ti
 ![](/images/7fecaa3de95afa/script.png)
 
 # おわりに
-Chrome DevToolsのRecoderは色々便利な使い道がありそうなので今後も探っていきたいと思います。
+Chrome DevToolsのRecorderは色々便利な使い道がありそうなので今後も探っていきたいと思います。
 今回利用したスクリプトは以下のGitHubリポジトリに編集前後の両方置いているので良ければ参照ください。
 https://github.com/kg0r0/coffee-checkout
 
