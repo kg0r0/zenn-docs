@@ -108,13 +108,6 @@ Confidential Clientなので、AuthorizationヘッダのClient Secretに間違�
 ```
 なお、Authorizationヘッダにて既にClient IDを指定していますが、ボディにもClient IDを含める必要があり、含めない場合は以下の通りエラーとなります。
 ```bash
-curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
-                  --basic -u '<Client ID>:<Client Secret>' \
-                  --header 'Content-Type: application/x-www-form-urlencoded' \
-                  --data-urlencode 'code=Authorization Code' \
-                  --data-urlencode 'grant_type=authorization_code' \
-                  --data-urlencode 'redirect_uri=https://127.0.0.1:3000/cb' \
-                  --data-urlencode 'code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk'
 {
   "error": "invalid_request",
   "error_description": "Missing required parameter [client_id]."
@@ -199,11 +192,6 @@ curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
 ```
 なお、Refresh Token利用時においても、ボディにもClient IDを含める必要があり、含めない場合は以下の通りエラーとなります。
 ```bash
-curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
-                 --basic -u '<Client ID>:<Client Secret>'\
-                 --header 'Content-Type: application/x-www-form-urlencoded' \
-                 --data-urlencode 'refresh_token=<Refresh Token>' \
-                 --data-urlencode 'grant_type=refresh_token'
 {
   "error": "invalid_request",
   "error_description": "Missing required parameter [client_id]."
@@ -211,11 +199,6 @@ curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
 ```
 また、Public Client向けに発行されたRefresh Tokenを利用する場合においてもAuthorizationヘッダを付与する必要があり、付与しない場合は以下のようにエラーになります。
 ```bash
-curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
-                 --header 'Content-Type: application/x-www-form-urlencoded' \
-                 --data-urlencode 'refresh_token=<Refresh Token>' \
-                 --data-urlencode 'grant_type=refresh_token' \
-                 --data-urlencode 'client_id=<Client ID>'
 {
   "error": "unauthorized_client",
   "error_description": "Missing valid authorization header"
