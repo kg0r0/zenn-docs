@@ -20,6 +20,9 @@ https://datatracker.ietf.org/doc/html/rfc7636
 本記事では説明の都合上、本来十分にランダムな値でなければならないstateやcode_verifier(およびcode_verifierから導出されるcode_challenge)について、固定の値を利用しています。
 実際は推測不可能なランダムな文字列を利用するようにしてください。
 
+また、Node.jsによる実装も用意しているので、あわせて参照いただけますと幸いです。
+https://github.com/kg0r0/twitter-oauth2-client
+
 # Developer Portal 
 Developer Portalにアクセスすると、``[User authentication settings]``という項目が追加されていることが確認できます。
 (``[User authentication settings]``という設定ですが、2021/12/15時点ではOpenID Connectには対応しておらず、認証結果を安全に受け取ることができるわけではありません。あくまでTwitter APIにアクセスする場合に利用します。)
@@ -114,21 +117,10 @@ Confidential Clientなので、AuthorizationヘッダのClient Secretに間違�
 }
 ```
 
-## "Web App"と"Automated App or bot"の違い
-結論から言うと"Web App"として登録した場合と"Automated App or bot"として登録した場合で違いは見受けられませんでした。
-例えば、OAuth2.0用に発行されたClient IDおよびClient Secretを用いてClient Credenial Grantが利用できるようになるといったこともありませんでした。
-```bash
-curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
-                  --basic -u '<Client ID>:<Client Secret>' \
-                  --header 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' \
-                  --data-urlencode 'grant_type=client_credentials' \
-                  --data-urlencode 'client_id=<Client ID>'
-{
-  "error": "invalid_request",
-  "error_description": "Value passed for the grant type was invalid. Grant type should be one of [authorization_code, refresh_token]."
-}
-```
-ちなみに、Twitterは以前よりOAuth2.0のClient Credential Grantはサポートしています。
+## (余談) Client Credential Grantについて
+
+Twitterは以前よりOAuth2.0のClient Credential Grantはサポートしています。
+Confidential Clientであれば、用途によってClient Credential Grantの利用も選択肢に入るかと思います。
 https://developer.twitter.com/en/docs/authentication/oauth-2-0/application-only
 Client Credential Grantでは、別途発行されたConsumer KeysのAPI KeyとAPI Secretを利用します。
 ```bash
@@ -141,6 +133,20 @@ curl --location --request POST 'https://api.twitter.com/oauth2/token' \
   "access_token": "<Access Token>"
 }
 ```
+OAuth2.0用に発行されたClient IDおよびClient Secretを用いてClient Credenial Grantは利用できず、以下のようなエラーになります。
+これは、``[Type of App]``を"Web App"から"Automated App or bot"に変えた場合においても、特に変化は見受けらません。
+```bash
+curl --location --request POST 'https://api.twitter.com/2/oauth2/token' \
+                  --basic -u '<Client ID>:<Client Secret>' \
+                  --header 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' \
+                  --data-urlencode 'grant_type=client_credentials' \
+                  --data-urlencode 'client_id=<Client ID>'
+{
+  "error": "invalid_request",
+  "error_description": "Value passed for the grant type was invalid. Grant type should be one of [authorization_code, refresh_token]."
+}
+```
+
 なお、Authorization Code GrantとClient Credential GrantでToken Endpointが微妙に違う点には注意してください。
 - Authorization Code Grant
 https://api.twitter.com/2/oauth2/token
