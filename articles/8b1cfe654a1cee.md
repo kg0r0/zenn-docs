@@ -21,7 +21,11 @@ https://datatracker.ietf.org/doc/html/rfc7636
 実際は推測不可能なランダムな文字列を利用するようにしてください。
 
 また、Node.jsによる実装も用意しているので、あわせて参照いただけますと幸いです。
+**Authorization Code Grant with PKCE:**
 https://github.com/kg0r0/twitter-oauth2-client
+**Client Credentials Grant:**
+https://github.com/kg0r0/twitter-client-credentials
+
 
 # Developer Portal 
 Developer Portalにアクセスすると、``[User authentication settings]``という項目が追加されていることが確認できます。
@@ -33,7 +37,8 @@ OAuth2.0を有効にした後に、``[OAUTH2.0 SETTINGS] > [Type of App]``から
 これはOAuth2.0におけるClient Typeを表しています。OAuth2.0におけるConfidentil ClientとPublic Clientの定義はそれぞれ以下のとおりになっています。
 - **Confidential Client**
 クレデンシャルの機密性を維持することができるクライアント
-- **Public Client**クライアントクレデンシャルの機密性を維持することができず, かつ他の手段を使用したセキュアなクライアント認証もできないクライアント
+- **Public Client**
+クライアントクレデンシャルの機密性を維持することができず, かつ他の手段を使用したセキュアなクライアント認証もできないクライアント
 
 (引用元: http://openid-foundation-japan.github.io/rfc6749.ja.html#client-types)
 
